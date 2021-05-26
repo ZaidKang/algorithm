@@ -18,6 +18,7 @@ dy=[0,0,-1,1]
 
 house_count_list=[]
 
+
 def bfs():
     count=0
     for i in range(0,n):
@@ -25,6 +26,7 @@ def bfs():
             if not visited[i][j] and graph[i][j]=='1':
                 house_count=0
                 visited[i][j]=True
+                graph[i][j]='0'
                 queue = deque()
                 queue.append((i,j))
                 
@@ -32,9 +34,9 @@ def bfs():
                 while queue:
                     x,y=queue.popleft()
                     house_count+=1
-                    for i in range(4):
-                        nx=x+dx[i]
-                        ny=y+dy[i]
+                    for k in range(4):
+                        nx=x+dx[k]
+                        ny=y+dy[k]
 
                         if nx<0 or nx>=n or ny<0 or ny>=n:
                             continue
@@ -44,13 +46,13 @@ def bfs():
                             visited[nx][ny]=True
                             queue.append((nx,ny))
                             
-                            
-
+            
                 count+=1
                 house_count_list.append(house_count)
                 
 
     print(count)
+    house_count_list.sort()
     for i in range(len(house_count_list)):
         print(house_count_list[i])
 
